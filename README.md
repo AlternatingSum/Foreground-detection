@@ -17,7 +17,14 @@ To reduce the number of computations and to ignore subtle edges within the backg
 
 We repeat this process, gradually refining our labeling on higher and higher resolution versions of the image, until we arrive at an image with a longer side of 400 pixels. 
 
+This image shows this process of gradual refinement for a picture of a pear: 
+
+![Layering a pear](https://i.imgur.com/LdnnSZM.jpg)
+
 ### Hue/saturation/value metric
+To approximate the chance that two colors on adjacent pixels belong to the same object, we first find their differences in hue, saturation, and value. The logic in using HSV rather than RGB is that a change in hue may be more likely to indicate a boundary between two objects, while a change in saturation or value may indicate the beginning on a shadow on a single object, so it may be helpful to consider hue separately. 
+
+Note that HSV color space uses a non-Euclidean metric, since fixing saturation and value but allowing hue to vary results in a circle. 
 
 ### Gradient descent and hyperbola fitting
 
