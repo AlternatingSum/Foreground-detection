@@ -37,3 +37,5 @@ Note that this fit is imperfect. In future work we may fit a hyperbola of the fo
 
 ### Largest connected component
 Once we have labelled all pixels in the highest resolution image as foreground or background, we use breadth first search to determine the largest connected component of the foreground, and eliminate all pixels classified as foreground outside of this component. 
+
+![The largest connected component of the foreground pixels for a pear image](https://i.imgur.com/zWXAA5t.jpg)
