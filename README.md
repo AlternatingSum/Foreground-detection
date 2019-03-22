@@ -27,5 +27,12 @@ To approximate the chance that two colors on adjacent pixels belong to the same 
 Note that HSV color space uses a non-Euclidean metric, since fixing saturation and value but allowing hue to vary results in a circle. 
 
 ### Gradient descent and hyperbola fitting
+Next, we determine appropriate cutoffs for differences in hue, saturation, and value for the image. To do this, we look at the distribution of differences between these values for adjacent pixels. These distributions tends to resemble hyperbolas of the form (1 + (m*x)^2)^0.5 - m*x (after scaling both dimensions appropriately). So, we use gradient descent to determine the value of m which best approximates the distribution for each of the three color parameters. 
+
+This image shows these three distributions for an image, along with the three hyperbolas fit to them: 
+
+![Modeling HSV differences for an image](https://i.imgur.com/yooCa3K.jpg)
+
+Note that this fit is imperfect. In future work we may fit a hyperbola of the form n((m*x)^2)^0.5 - m*x) instead, and use two dimensional gradient descent (on n and m) to improve the fit. 
 
 ### Largest connected component
