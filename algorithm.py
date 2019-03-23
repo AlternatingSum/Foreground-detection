@@ -220,7 +220,7 @@ def euclid_color_dist(color1, color2):
     return (float(color1[0] - color2[0]))**2 + (float(color1[1] - color2[1]))**2 + (float(color1[2] - color2[2]))**2
 
 
-def border(image):
+def find_border(image):
     """Returns a list of the border pixels in an image"""
     
     rows = range(len(image))
@@ -295,7 +295,7 @@ def known_gaussian_smoothing(background_prob, min_prob, sigma):
     """Also applies a Gaussian blur to the resulting collection of known pixels"""
     
     known_list = []
-    border_pixels = border(background_prob)
+    border_pixels = find_border(background_prob)
     height = len(background_prob)
     width = len(background_prob[0])
     known_pixels = np.zeros((height, width))
@@ -332,7 +332,7 @@ def known_gaussian_smoothing(background_prob, min_prob, sigma):
     return [known_list, new_known]
 
 
-def connected_component(known):
+def largest_connected_component(known):
     """Determines the largest connected component consisting of known foreground pixels"""
     
     height = len(known)
@@ -450,7 +450,7 @@ def layered_foreground(image_list, min_prob_2):
     """Uses a list of rescaled versions of an image to find the foreground of the original image. 
     Uses k-means clustering to determine the appropriate Gaussian for colors in each cluster."""
     
-    known = border(image_list[-1])
+    known = find_border(image_list[-1])
     known_image = image_list[-1]
     current_image = image_list[-1]
     
@@ -486,7 +486,7 @@ scaled_images = create_scaled_images(image)
 
 foreground = layered_foreground(scaled_images, 0.9)
 
-connected = connected_component(foreground)
+connected = largest_connected_component(foreground)
 
 plt.imshow(connected)
 plt.show()
