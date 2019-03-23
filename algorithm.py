@@ -479,12 +479,13 @@ def layered_foreground(image_list, min_prob_2):
     
     return known_image
 
+
 """Loads an image and detects its foreground"""
-image = io.imread("Latte.jpg")
+image_to_parse = io.imread("Latte.jpg")
 
-scaled_images = create_scaled_images(image)
+scaled_image_list = create_scaled_images(image_to_parse)
 
-foreground = layered_foreground(scaled_images, 0.9)
+foreground = layered_foreground(scaled_image_list, 0.9)
 
 connected = largest_connected_component(foreground)
 
